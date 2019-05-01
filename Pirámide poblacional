@@ -1,0 +1,9 @@
+library(ggplot2)
+
+test = data.frame(v=sample(1:20,1000,replace=TRUE), g=c('M','F'))
+
+ggplot(data=test,aes(x=as.factor(v),fill=g)) + 
+  geom_bar(subset(test,g=='F')) + 
+  geom_bar(subset(test,g=='M'),aes(y=..count..*(-1))) +
+  scale_y_continuous(breaks=seq(-40,40,10),labels=abs(seq(-40,40,10))) +
+  coord_flip()
